@@ -4,5 +4,6 @@ This lib can support different section view and pinned at top of ListView when s
 ![Screen Flow Demo] (https://github.com/lchli/AndroidPinnedRecyclerView/raw/master/PinedRecyclerListView/screenshot/s1.gif)
 
 ##Usage:
-**https://github.com/lchli/AndroidPinnedRecyclerView/blob/master/PinedRecyclerListView/app/src/main/java/com/lchli/pinedrecyclerlistview/sample/MainActivity.java**
+
+**[MainActivity](https://github.com/lchli/AndroidPinnedRecyclerView/blob/master/PinedRecyclerListView/app/src/main/java/com/lchli/pinedrecyclerlistview/sample/MainActivity.java)**
 
