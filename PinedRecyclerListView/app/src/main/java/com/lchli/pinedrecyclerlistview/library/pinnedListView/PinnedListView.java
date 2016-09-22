@@ -21,6 +21,7 @@ public class PinnedListView extends ListView {
     private int mWidthMode;
     private int mHeightMode;
     private AbsAdapter.AbsViewHolder vh;
+    private OnScrollListener mOnScrollListener;
 
     public PinnedListView(Context context) {
         super(context);
@@ -37,17 +38,27 @@ public class PinnedListView extends ListView {
         init();
     }
 
+    @Override
+    public void setOnScrollListener(OnScrollListener lsn) {
+        mOnScrollListener = lsn;
+    }
 
     private void init() {
-        setOnScrollListener(new AbsListView.OnScrollListener() {
+        super.setOnScrollListener(new AbsListView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (mOnScrollListener != null) {
+                    mOnScrollListener.onScrollStateChanged(view, scrollState);
+                }
 
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (mOnScrollListener != null) {
+                    mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+                }
 
                 PinnedListAdapter adapter = (PinnedListAdapter) getAdapter();
                 if (adapter == null) {
