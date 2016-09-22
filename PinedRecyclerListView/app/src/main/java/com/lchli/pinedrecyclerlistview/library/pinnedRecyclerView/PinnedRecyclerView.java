@@ -73,7 +73,7 @@ public class PinnedRecyclerView extends RecyclerView {
 
             int widthSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), mWidthMode);
             int heightSpec;
-            ViewGroup.LayoutParams layoutParams = vh.itemView.getLayoutParams();//note:if itemview use fixedsize will be invalid.
+            ViewGroup.LayoutParams layoutParams = vh.itemView.getLayoutParams();
             if (layoutParams != null && layoutParams.height > 0) {
                 heightSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, View.MeasureSpec.EXACTLY);
             } else {

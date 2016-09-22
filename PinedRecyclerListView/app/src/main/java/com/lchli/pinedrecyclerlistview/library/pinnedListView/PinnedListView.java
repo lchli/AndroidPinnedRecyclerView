@@ -81,7 +81,7 @@ public class PinnedListView extends ListView {
 
             int widthSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), mWidthMode);
             int heightSpec;
-            ViewGroup.LayoutParams layoutParams = vh.getItemView().getLayoutParams();//note:if itemview use fixedsize will be invalid.
+            ViewGroup.LayoutParams layoutParams = vh.getItemView().getLayoutParams();
             if (layoutParams != null && layoutParams.height > 0) {
                 heightSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, View.MeasureSpec.EXACTLY);
             } else {
