@@ -44,57 +44,56 @@ public class PinnedListView extends ListView {
     }
 
     private void init() {
-        super.setOnScrollListener(new AbsListView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if (mOnScrollListener != null) {
-                    mOnScrollListener.onScrollStateChanged(view, scrollState);
-                }
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (mOnScrollListener != null) {
-                    mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-                }
-
-                PinnedListAdapter adapter = (PinnedListAdapter) getAdapter();
-                if (adapter == null) {
-                    return;
-                }
-
-                ListSectionData previousSection = adapter.getSectionFinder().findSectionData(firstVisibleItem);
-                if (previousSection == null) {
-                    setPinnedView(null);
-                    return;
-                }
-
-                if (vh == null || vh.viewType != previousSection.sectionViewType) {
-                    vh = adapter.onCreateViewHolder(PinnedListView.this, previousSection.sectionViewType);
-                }
-                adapter.onBindViewHolder(vh, previousSection.inAdapterPosition);
-
-                int widthSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), mWidthMode);
-                int heightSpec;
-                ViewGroup.LayoutParams layoutParams = vh.getItemView().getLayoutParams();//note:if itemview use fixedsize will be invalid.
-                if (layoutParams != null && layoutParams.height > 0) {
-                    heightSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, View.MeasureSpec.EXACTLY);
-                } else {
-                    heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-                }
-                vh.getItemView().measure(widthSpec, heightSpec);
-                vh.getItemView().layout(0, 0, vh.getItemView().getMeasuredWidth(), vh.getItemView().getMeasuredHeight());
-
-                setPinnedView(vh.getItemView());
-
-            }
-
-
-        });
+        super.setOnScrollListener(new MyOnScrollListener());
     }
 
+    private class MyOnScrollListener implements AbsListView.OnScrollListener {
+
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            if (mOnScrollListener != null) {
+                mOnScrollListener.onScrollStateChanged(view, scrollState);
+            }
+
+        }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            if (mOnScrollListener != null) {
+                mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
+            }
+
+            PinnedListAdapter adapter = (PinnedListAdapter) getAdapter();
+            if (adapter == null) {
+                return;
+            }
+
+            ListSectionData previousSection = adapter.getSectionFinder().findSectionData(firstVisibleItem);
+            if (previousSection == null) {
+                setPinnedView(null);
+                return;
+            }
+
+            if (vh == null || vh.viewType != previousSection.sectionViewType) {
+                vh = adapter.onCreateViewHolder(PinnedListView.this, previousSection.sectionViewType);
+            }
+            adapter.onBindViewHolder(vh, previousSection.inAdapterPosition);
+
+            int widthSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), mWidthMode);
+            int heightSpec;
+            ViewGroup.LayoutParams layoutParams = vh.getItemView().getLayoutParams();//note:if itemview use fixedsize will be invalid.
+            if (layoutParams != null && layoutParams.height > 0) {
+                heightSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, View.MeasureSpec.EXACTLY);
+            } else {
+                heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            }
+            vh.getItemView().measure(widthSpec, heightSpec);
+            vh.getItemView().layout(0, 0, vh.getItemView().getMeasuredWidth(), vh.getItemView().getMeasuredHeight());
+
+            setPinnedView(vh.getItemView());
+        }
+
+    }
 
     @Override
     protected void dispatchDraw(Canvas canvas) {

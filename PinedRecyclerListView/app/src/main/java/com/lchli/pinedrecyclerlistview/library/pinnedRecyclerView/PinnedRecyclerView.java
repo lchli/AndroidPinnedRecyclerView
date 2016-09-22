@@ -38,50 +38,52 @@ public class PinnedRecyclerView extends RecyclerView {
         init();
     }
 
-
     private void init() {
-        addOnScrollListener(new OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                PinnedRecyclerAdapter adapter = (PinnedRecyclerAdapter) getAdapter();
-                if (adapter == null) {
-                    return;
-                }
-                int first;
-                LayoutManager manager = getLayoutManager();
-                if (manager instanceof LinearLayoutManager) {
-                    LinearLayoutManager layoutManager = (LinearLayoutManager) manager;
-                    first = layoutManager.findFirstVisibleItemPosition();
-                } else {
-                    throw new IllegalArgumentException("PinnedRecyclerView only surpport LinearLayoutManager/GridLayoutManager so far.");
-                }
+        addOnScrollListener(new MyOnScrollListener());
+    }
 
-                ListSectionData previousSection = adapter.getSectionFinder().findSectionData(first);
-                if (previousSection == null) {
-                    setPinnedView(null);
-                    return;
-                }
+    private class MyOnScrollListener extends RecyclerView.OnScrollListener {
 
-                if (vh == null || vh.getItemViewType() != previousSection.sectionViewType) {
-                    vh = adapter.onCreateViewHolder(PinnedRecyclerView.this, previousSection.sectionViewType);
-                }
-                adapter.onBindViewHolder(vh, previousSection.inAdapterPosition);
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
-                int widthSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), mWidthMode);
-                int heightSpec;
-                ViewGroup.LayoutParams layoutParams = vh.itemView.getLayoutParams();//note:if itemview use fixedsize will be invalid.
-                if (layoutParams != null && layoutParams.height > 0) {
-                    heightSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, View.MeasureSpec.EXACTLY);
-                } else {
-                    heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-                }
-                vh.itemView.measure(widthSpec, heightSpec);
-                vh.itemView.layout(0, 0, vh.itemView.getMeasuredWidth(), vh.itemView.getMeasuredHeight());
-
-                setPinnedView(vh.itemView);
-
+            PinnedRecyclerAdapter adapter = (PinnedRecyclerAdapter) getAdapter();
+            if (adapter == null) {
+                return;
             }
-        });
+            int first;
+            LayoutManager manager = getLayoutManager();
+            if (manager instanceof LinearLayoutManager) {
+                LinearLayoutManager layoutManager = (LinearLayoutManager) manager;
+                first = layoutManager.findFirstVisibleItemPosition();
+            } else {
+                throw new IllegalArgumentException("PinnedRecyclerView only surpport LinearLayoutManager/GridLayoutManager so far.");
+            }
+
+            ListSectionData previousSection = adapter.getSectionFinder().findSectionData(first);
+            if (previousSection == null) {
+                setPinnedView(null);
+                return;
+            }
+
+            if (vh == null || vh.getItemViewType() != previousSection.sectionViewType) {
+                vh = adapter.onCreateViewHolder(PinnedRecyclerView.this, previousSection.sectionViewType);
+            }
+            adapter.onBindViewHolder(vh, previousSection.inAdapterPosition);
+
+            int widthSpec = View.MeasureSpec.makeMeasureSpec(getMeasuredWidth(), mWidthMode);
+            int heightSpec;
+            ViewGroup.LayoutParams layoutParams = vh.itemView.getLayoutParams();//note:if itemview use fixedsize will be invalid.
+            if (layoutParams != null && layoutParams.height > 0) {
+                heightSpec = View.MeasureSpec.makeMeasureSpec(layoutParams.height, View.MeasureSpec.EXACTLY);
+            } else {
+                heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            }
+            vh.itemView.measure(widthSpec, heightSpec);
+            vh.itemView.layout(0, 0, vh.itemView.getMeasuredWidth(), vh.itemView.getMeasuredHeight());
+
+            setPinnedView(vh.itemView);
+        }
     }
 
     @Override
