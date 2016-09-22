@@ -5,7 +5,7 @@ This lib can support different section view and pinned at top of ListView when s
 
 ##Usage:
 
-**[MainActivity](https://github.com/lchli/AndroidPinnedRecyclerView/blob/master/PinedRecyclerListView/app/src/main/java/com/lchli/pinedrecyclerlistview/sample/PinnedRecyclerViewDemoActivity.java)**
+**[PinnedRecyclerViewDemoActivity](https://github.com/lchli/AndroidPinnedRecyclerView/blob/master/PinedRecyclerListView/app/src/main/java/com/lchli/pinedrecyclerlistview/sample/PinnedRecyclerViewDemoActivity.java)**
 
-**[MainActivity](https://github.com/lchli/AndroidPinnedRecyclerView/blob/master/PinedRecyclerListView/app/src/main/java/com/lchli/pinedrecyclerlistview/sample/PinnedListViewDemoActivity.java)**
+**[PinnedListViewDemoActivity](https://github.com/lchli/AndroidPinnedRecyclerView/blob/master/PinedRecyclerListView/app/src/main/java/com/lchli/pinedrecyclerlistview/sample/PinnedListViewDemoActivity.java)**
 
