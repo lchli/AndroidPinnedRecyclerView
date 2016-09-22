@@ -1,4 +1,4 @@
-package com.lchli.pinedrecyclerlistview.library;
+package com.lchli.pinedrecyclerlistview.library.pinnedRecyclerView;
 
 import android.support.v7.widget.RecyclerView;
 

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000"
-    tools:context="com.lchli.pinedrecyclerlistview.sample.MainActivity">
+    tools:context="com.lchli.pinedrecyclerlistview.sample.PinnedRecyclerViewDemoActivity">
 
-    <com.lchli.pinedrecyclerlistview.library.PinnedRecyclerView
-        android:id="@+id/recyclerView"
+    <com.lchli.pinedrecyclerlistview.library.pinnedListView.PinnedListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

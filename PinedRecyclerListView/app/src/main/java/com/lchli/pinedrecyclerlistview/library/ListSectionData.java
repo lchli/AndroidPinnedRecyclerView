@@ -12,7 +12,7 @@ import java.io.Serializable;
 public abstract class ListSectionData implements Serializable {
 
     public int sectionViewType;
-    int inAdapterPosition;
+    public int inAdapterPosition;
 
     public ListSectionData(int sectionViewType) {
         this.sectionViewType = sectionViewType;

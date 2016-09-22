@@ -1,36 +1,40 @@
 package com.lchli.pinedrecyclerlistview.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lchli.pinedrecyclerlistview.R;
 import com.lchli.pinedrecyclerlistview.library.ListSectionData;
-import com.lchli.pinedrecyclerlistview.library.PinnedRecyclerAdapter;
-import com.lchli.pinedrecyclerlistview.library.PinnedRecyclerView;
+import com.lchli.pinedrecyclerlistview.library.pinnedRecyclerView.PinnedRecyclerAdapter;
+import com.lchli.pinedrecyclerlistview.library.pinnedRecyclerView.PinnedRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lchli.pinedrecyclerlistview.sample.MainActivity.TestAdapter.VIEW_TYPE_SECTION_1;
-import static com.lchli.pinedrecyclerlistview.sample.MainActivity.TestAdapter.VIEW_TYPE_SECTION_2;
+import static com.lchli.pinedrecyclerlistview.sample.PinnedRecyclerViewDemoActivity.TestAdapter.VIEW_TYPE_SECTION_1;
+import static com.lchli.pinedrecyclerlistview.sample.PinnedRecyclerViewDemoActivity.TestAdapter.VIEW_TYPE_SECTION_2;
 
-/**@author lchli
- * this sample show how to use different section in PinnedRecyclerView.
+/**
+ * @author lchli
+ *         this sample show how to use different section in PinnedRecyclerView.
  */
-public class MainActivity extends AppCompatActivity {
+public class PinnedRecyclerViewDemoActivity extends AppCompatActivity {
 
     private PinnedRecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_pinned_recycler_view);
 
         recyclerView = (PinnedRecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -56,6 +60,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recycler_demo_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.openListView:
+                Intent it = new Intent(this, PinnedListViewDemoActivity.class);
+                startActivity(it);
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private static class TestSectionData extends ListSectionData {
 

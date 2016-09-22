@@ -9,13 +9,15 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Created by lchli on 2016/9/20.
+ * this is a helper to find list section.
+ * Created by lchli on 2016/9/22.
  */
 
-public abstract class PinnedRecyclerAdapter extends BaseRecyclerAdapter<Object> {
+public class SectionFinder {
 
     private List<ListSectionData> sectionDataList = new ArrayList<>();
     private SparseArray<SoftReference<Object>> cacheMap = new SparseArray<>();
+
 
     /**
      * find previous section data before current firstVisiablePosition.
@@ -23,7 +25,7 @@ public abstract class PinnedRecyclerAdapter extends BaseRecyclerAdapter<Object> 
      * @param firstVisiablePosition
      * @return
      */
-    ListSectionData findSectionData(int firstVisiablePosition) {
+    public ListSectionData findSectionData(int firstVisiablePosition) {
 
         SoftReference<Object> cacheRef = cacheMap.get(firstVisiablePosition);
         if (cacheRef != null) {
@@ -75,21 +77,6 @@ public abstract class PinnedRecyclerAdapter extends BaseRecyclerAdapter<Object> 
     }
 
     /**
-     * when you changed adapter data,you must call this to reset.
-     *
-     * @param datas
-     */
-    @Override
-    public void refresh(List datas) {
-        cacheMap.clear();
-        sectionDataList.clear();
-        saveSectionDatas(datas);
-
-        super.refresh(datas);
-
-    }
-
-    /**
      * add section data to sectionDataList.
      *
      * @param datas
@@ -115,5 +102,15 @@ public abstract class PinnedRecyclerAdapter extends BaseRecyclerAdapter<Object> 
         });
     }
 
+    /**
+     * when you changed adapter data,you must call this to reset.
+     *
+     * @param datas
+     */
+    public void refresh(List datas) {
+        cacheMap.clear();
+        sectionDataList.clear();
+        saveSectionDatas(datas);
 
+    }
 }
