@@ -6,7 +6,9 @@ This lib can support different section view and pinned at top of ListView when s
 ##Usage:
 
 depedencies {
+
   compile 'com.github.lchli:AndroidPinnedRecyclerView:1.0.0'
+  
 }
 
 ##Demo:
