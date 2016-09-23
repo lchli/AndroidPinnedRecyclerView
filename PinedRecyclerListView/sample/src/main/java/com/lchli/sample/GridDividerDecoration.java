@@ -1,4 +1,4 @@
-package com.lchli.pinedrecyclerlistview.sample;
+package com.lchli.sample;
 
 import android.content.Context;
 import android.content.res.TypedArray;
